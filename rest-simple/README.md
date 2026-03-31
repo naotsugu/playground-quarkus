@@ -1,8 +1,36 @@
 # rest-simple
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+```java
+@Path("/hello")
+public class GreetingResource {
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+    @Inject
+    GreetingService service;
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/greeting/{name}")
+    public String greeting(String name) {
+        return service.greeting(name);
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return "Hello from Quarkus REST";
+    }
+}
+```
+
+```java
+@ApplicationScoped
+public class GreetingService {
+    public String greeting(String name) {
+        return "hello " + name;
+    }
+}
+```
+
 
 ## Running the application in dev mode
 
